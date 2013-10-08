@@ -27,6 +27,7 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
+
     {% javascripts
         vars=["locale"]
         "@ClarolineCoreBundle/Resources/views/Resource/breadcrumbs.html.twigjs"
