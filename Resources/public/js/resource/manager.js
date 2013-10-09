@@ -698,11 +698,13 @@
             },
             close: function () {
                 $('#modal-form', this.el).modal('hide');
+                $('#modal-body', this.el).remove();
             },
             render: function (form, targetNodeId, eventOnSubmit) {
                 this.targetNodeId = targetNodeId;
                 this.eventOnSubmit = eventOnSubmit;
                 form = form.replace('_nodeId', targetNodeId);
+
                 if ($('#modal-form').attr('id') === undefined) {
                     $(this.el).html(Twig.render(ModalWindow, {
                         'body': form,
@@ -710,6 +712,7 @@
                     }));
                     $('#modal-form', this.el).modal('show');
                 } else {
+                    $('#modal-body', this.el).remove();
                     $('.modal-body', this.el).html(form);
                     $('#modal-form', this.el).modal('show');
                 }

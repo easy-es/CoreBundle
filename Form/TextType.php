@@ -22,7 +22,7 @@ class TextType extends AbstractType
 
     public function getName()
     {
-        return 'text_form'.rand(0, 1000);
+        return 'text_form';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
