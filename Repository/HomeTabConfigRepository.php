@@ -80,8 +80,9 @@ class HomeTabConfigRepository extends EntityRepository
     public function findWorkspaceHomeTabConfigsByWorkspace(AbstractWorkspace $workspace)
     {
         $dql = "
-            SELECT htc
+            SELECT htc , h
             FROM Claroline\CoreBundle\Entity\Home\HomeTabConfig htc
+            LEFT JOIN htc.homeTab h
             WHERE htc.workspace = :workspace
             AND htc.type = 'workspace'
             ORDER BY htc.tabOrder ASC
@@ -144,9 +145,10 @@ class HomeTabConfigRepository extends EntityRepository
     public function findVisibleWorkspaceHomeTabConfigsByWorkspace(AbstractWorkspace $workspace)
     {
         $dql = "
-            SELECT htc, ht
+            SELECT htc, ht , w
             FROM Claroline\CoreBundle\Entity\Home\HomeTabConfig htc
-            JOIN htc.homeTab ht
+            LEFT JOIN htc.homeTab ht
+            LEFT JOIN htc.workspace w
             WHERE htc.workspace = :workspace
             AND htc.type = 'workspace'
             AND htc.visible = true

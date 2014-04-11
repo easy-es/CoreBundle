@@ -315,9 +315,10 @@ class UserRepository extends EntityRepository implements UserProviderInterface
     public function findByGroup(Group $group, $executeQuery = true, $orderedBy = 'id')
     {
         $dql = '
-            SELECT DISTINCT u, g, pw, r from Claroline\CoreBundle\Entity\User u
+            SELECT DISTINCT u, g, pw, r, up from Claroline\CoreBundle\Entity\User u
             JOIN u.groups g
             LEFT JOIN u.personalWorkspace pw
+            LEFT JOIN u.publicProfilePreferences up
             LEFT JOIN u.roles r WITH r IN (
                 SELECT pr from Claroline\CoreBundle\Entity\Role pr WHERE pr.type = ' . Role::PLATFORM_ROLE . "
             )
@@ -802,11 +803,12 @@ class UserRepository extends EntityRepository implements UserProviderInterface
     {
         $order = $order === 'DESC' ? 'DESC' : 'ASC';
         $dql = "
-            SELECT u, r1, g, r2, ws From Claroline\CoreBundle\Entity\User u
+            SELECT u, r1, g, r2, ws, up From Claroline\CoreBundle\Entity\User u
             LEFT JOIN u.roles r1
             LEFT JOIN u.personalWorkspace ws
             LEFT JOIN u.groups g
             LEFT JOIN g.roles r2
+            LEFT JOIN u.publicProfilePreferences up
             WHERE r1 in (:roles)
             AND u.isEnabled = true
             OR r2 in (:roles)
