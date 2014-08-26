@@ -1,8 +1,11 @@
 agenda: Calendar
 analytics: Dashboard
 badges: Badges
+competence_referencial: Learning Outcomes
+competence_subscription: Learning Outcomes Subscription
 my_badges: My badges
 home: Home
+learning_profil: Learning Profile
 logs: Logs
 parameters: Settings
 resource_manager: Resources

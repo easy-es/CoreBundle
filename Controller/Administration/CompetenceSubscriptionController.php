@@ -13,6 +13,7 @@ namespace Claroline\CoreBundle\Controller\Administration;
 
 use Claroline\CoreBundle\Entity\User;
 use Claroline\CoreBundle\Entity\Competence\CompetenceNode;
+use Claroline\CoreBundle\Entity\Competence\Competence;
 use Claroline\CoreBundle\Manager\ToolManager;
 use Claroline\CoreBundle\Form\Factory\FormFactory;
 use Claroline\CoreBundle\Manager\UserManager;
@@ -98,7 +99,7 @@ class CompetenceSubscriptionController {
      * @EXT\Method("GET")
      * @EXT\ParamConverter(
      *     "competences",
-     *      class="ClarolineCoreBundle:Competence\Competence",
+     *      class="ClarolineCoreBundle:Competence\CompetenceNode",
      *      options={"multipleIds" = true, "name" = "competences"}
      * )
      * 
@@ -131,7 +132,7 @@ class CompetenceSubscriptionController {
      * @EXT\Method("GET")
      * @EXT\ParamConverter(
      *     "competences",
-     *      class="ClarolineCoreBundle:Competence\Competence",
+     *      class="ClarolineCoreBundle:Competence\CompetenceNode",
      *      options={"multipleIds" = true, "name" = "competences"}
      * )
      * @EXT\ParamConverter(
@@ -143,7 +144,7 @@ class CompetenceSubscriptionController {
      **/ 
     public function subscriptionUsersAction(array $users, array $competences)
     {
-    	$this->cptmanager->subscribeUserToCompetences($users, $competences);
+    	$this->cptmanager->subscribeUserToCompetencesRoot($users, $competences);
     	return New Response(200);
     }
 

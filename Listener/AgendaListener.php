@@ -99,7 +99,7 @@ class AgendaListener
         }
 
         $params = array();
-        $params['_controller'] = 'ClarolineCoreBundle:Tool\DesktopAgenda:widget';
+        $params['_controller'] = 'ClarolineCoreBundle:Tool\Agenda\DesktopAgenda:widget';
         $subRequest = $this->request->duplicate(array(), null, $params);
         $response = $this->httpKernel->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
 

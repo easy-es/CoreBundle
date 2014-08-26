@@ -66,7 +66,7 @@
         	parameters.parentId = parentId;
     	}
 
-    	var route = Routing.generate('claro_admin_competence_move',{'parentId': parentId});
+    	var route = Routing.generate('claro_admin_competence_move',{'parent': parentId});
     	route += '?'+$.param(parameters);
         $.ajax({
             'url': route,

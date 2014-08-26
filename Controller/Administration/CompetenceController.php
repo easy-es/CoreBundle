@@ -91,7 +91,7 @@ class CompetenceController {
     public function addCompetenceModalForm()
     {
         $this->checkOpen();
-        $form = $this->formFactory->create(new CompetenceType());
+        $form = $this->formFactory->create(new CompetenceType(), new Competence());
 
         return array(
             'form' => $form->createView(),
@@ -129,7 +129,7 @@ class CompetenceController {
     public function formCompetenceNodeAction(CompetenceNode $competence)
     {
         $this->checkOpen();
-        $form = $this->formFactory->create(new CompetenceType());
+        $form = $this->formFactory->create(new CompetenceType(), new Competence());
 
         return array(
             'form' => $form->createView(),
@@ -150,7 +150,7 @@ class CompetenceController {
      */
     public function addCompetenceNode(CompetenceNode $competence)
     {
-        $form = $this->formFactory->create(new CompetenceType());
+        $form = $this->formFactory->create(new CompetenceType(), new Competence());
         $form->handleRequest($this->request);
 
         if ($form->isValid()) {            
@@ -183,7 +183,7 @@ class CompetenceController {
      */
     public function addCompetenceAction()
     {
-        $form = $this->formFactory->create(new CompetenceType());
+        $form = $this->formFactory->create(new CompetenceType(), new Competence());
         $form->handleRequest($this->request);
 
         if ($form->isValid()) {
@@ -220,7 +220,7 @@ class CompetenceController {
     public function subCompetenceAction($competence)
     {
         $this->checkOpen();
-        $form = $this->formFactory->create(new CompetenceType());
+        $form = $this->formFactory->create(new CompetenceType(), new Competence());
         $form->handleRequest($this->request);
 
         if ($form->isValid()) {        	
@@ -255,7 +255,7 @@ class CompetenceController {
      */
     public function modifyCompetenceAction($competence)
     {
-	 	$form = $this->formFactory->create(new CompetenceType(), array(), $competence->getCompetence());
+	 	$form = $this->formFactory->create(new CompetenceType(),$competence->getCompetence(), array());
         $addForm = $this->formFactory->create(new CompetenceType());
         $form->handleRequest($this->request);
         if ($form->isValid()) {
@@ -348,11 +348,12 @@ class CompetenceController {
         $competenceId = $this->request->request->get('competence');
         $competence = $this->om->getRepository('ClarolineCoreBundle:Competence\CompetenceNode')->findOneById($competenceId);
         $this->cptmanager->link($competence, $parent);
-        $competences = $this->cptmanager->getHierarchyName($competence);
+        $tree = $this->cptmanager->getHierarchy($competence);
            
         return array(
-            'competences' => $competences,
-            'cpt' => $parent
+            'tree' => $tree,
+            'cpt' => $parent,
+            'competences' => $this->cptmanager->getHierarchy($competence)
         );
     }
 

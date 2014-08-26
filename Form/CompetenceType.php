@@ -34,6 +34,10 @@ class CompetenceType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('translation_domain' => 'competence'));
+        $resolver->setDefaults(
+            array(
+                'translation_domain' => 'competence'
+            )
+        );
     }
 } 
